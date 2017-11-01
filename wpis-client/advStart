@@ -1,0 +1,31 @@
+#!/bin/bash
+#  author fengxp
+#  time  2016-05-24 
+#  program : 配置显示输出，并调用显示
+
+xrandr --newmode "1920x1080_60.00"  173.00  1920 2048 2248 2576  1080 1083 1088 1120 -hsync +vsync
+xrandr --addmode VGA1 "1920x1080_60.00"
+xrandr --output VGA1 --mode "1920x1080_60.00"
+
+xrandr -s 1920×1080
+#xrandr -o left
+xrandr -q > /root/advStart.log
+date >> /root/advStart.log
+
+scren=$(cat /var/eadv/proxy/event/order.log)
+if [ "$scren" == "4" ]; then
+	xrandr -o left
+elif [ "$scren" == "3" ]; then
+	xrandr -o normal
+else
+	echo "error screen"
+fi  
+while [ true ];do
+
+	killall rsyncStart pushStart pollStart chromStart chromium-browser
+
+	/var/eadv/rsyncStart &
+	/var/eadv/pushStart &
+	/var/eadv/myHttpdStart &
+	/var/eadv/chromStart
+done

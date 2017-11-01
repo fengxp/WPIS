@@ -1,0 +1,68 @@
+<include file="Public/head"/>
+<div class="table_full">
+<table class="table table-striped table-bordered table-hover">
+	<tr>
+		<th width="20%" >名称:</th>
+		<td width="80%">{$val.name}</td>
+		</td>
+	</tr>
+	<tr>
+		<th width="20%">类型</th>
+		<td width="80%">{$val.type|getDeviceType}</td>
+	</tr>
+	<tr>
+		<th width="20%">ID</th>
+		<td width="80%">{$val.id}</td>
+	</tr>
+	<tr>
+		<th width="20%">提交时间：</th>
+		<td width="80%">{$val.sub_time|date='Y-m-d H:i',###} </td>
+	</tr>
+	<tr style="display:{$hidden}" >
+		<th width="20%">IP地址1：</th>
+		<td width="80%">{$val.addr1}</td>
+	</tr>
+	<tr style="display:{$hidden}">
+		<th width="20%">IP地址2：</th>
+		<td width="80%">{$val.addr2}</td>
+	</tr>
+	<tr style="display:{$hidden}">
+		<th width="20%">MAC：</th>
+		<td width="80%" >{$val.mac}</td>	
+	</tr>
+	<tr style="display:{$hidden}" id="cpu_row">
+	<if condition=" $val.cpu gt 60">
+		<th width="20%" bgcolor="#FF0000">CPU：</th>
+		<td width="80%" bgcolor="#FF0000">{$val.cpu}</td>	
+	<else/>
+		<th width="20%" >CPU：</th>
+		<td width="80%" >{$val.cpu}</td>
+	</if>
+	</tr>
+	<tr style="display:{$hidden}" id="memory_row">
+	<if condition=" $val.memory gt 50">
+		<th width="20%"  bgcolor="#FF0000">内存：</th>
+		<td width="80%"  bgcolor="#FF0000">{$val.memory}</td>
+	<else/>
+		<th width="20%" >内存：</th>
+		<td width="80%" >{$val.memory}</td>
+	</if>
+	</tr>
+	<tr style="display:{$hidden}" id="diskpercent_row">
+		<if condition=" $val.diskpercent gt 70">
+		<th width="20%"  bgcolor="#FF0000">硬盘占比：</th>
+		<td width="80%"  bgcolor="#FF0000">{$val.diskpercent}</td>
+		<else/>
+		<th width="20%">硬盘占比：</th>
+		<td width="80%">{$val.diskpercent}</td>
+	 	</if>
+	</tr>
+	<tr>
+		<th width="20%">注意</th>
+		<td width="80%">cpu超过60为异常,反之正常;内存超过50为异常,反之正常;硬盘占比超过70为异常,反之正常;</td>
+	</tr>
+</table>
+
+</div>
+
+

@@ -1,0 +1,51 @@
+<include file="Public/head"/>
+<table class="table table-hover text-center table-striped">
+	<tbody>
+		<volist name="mpList" id="mp">
+		<tr>
+			<td><input type="checkbox" class="imgid" value="{$mp.id}"
+				data-name="{$mp.file_name}"
+				data-src="" 
+				data-url=""
+				/>
+			</td>
+			<td align="left">{$mp.file_name}</td>
+			<td>
+				<a target="_blank" href="__PUBLIC__/upload/{$mp.temp_name}">查看</a>
+			</td>
+		</tr>
+		</volist>
+		<tr>
+			<td colspan="2">
+				<div class="page">{$page}</div>
+			</td>
+			<td>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			</td>
+		</tr>
+		
+	</tbody>
+</table>
+<include file="Public/footerjs"/>
+<script>
+$(function() {
+	$(".imgid").click(function() {
+		var checkbox = $(this).find("input").get(0);
+		checkbox.checked = !checkbox.checked;
+	});
+})
+
+function selectAll(check) {
+	$('.imgid').prop('checked', check);
+
+}
+function getImage() {
+	var imgArr = new Array();
+	$('.imgid:checked').each(
+			function(e) {
+				imgArr.push(new Array($(this).val(), $(this).data("name"), $(
+						this).data("src"), $(this).data("url")));
+			});
+	return imgArr;
+}
+</script>

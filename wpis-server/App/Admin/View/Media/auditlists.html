@@ -1,0 +1,106 @@
+<include file="Public/head"/>
+<body class="no-skin">
+<include file="Public/header"/>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <include file="Public/sidebar"/>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <include file="Public/breadcrumbs"/>
+
+            <!-- /section:basics/content.breadcrumbs -->
+            <div class="page-content">
+                <include file="Public/set"/>
+
+                <!-- /section:settings.box -->
+                <div class="row">
+                    <div class="col-xs-12">
+						
+                        <form class="form-inline" action="" method="get">
+                             <a class="btn btn-info" href="" value="">未审核素材列表</a>
+                             <label class="inline">&nbsp;&nbsp;名称：</label>
+                             <input type="text" name="keyword" value="{:I(keyword)}" class="form-control">
+                             <label class="inline">&nbsp;&nbsp;排序：</label>
+                             <select name="order" class="form-control">
+                                <option <if condition="I('order') eq asc">selected</if> value="asc">提交时间升</option>
+                                <option <if condition="I('order') eq desc">selected</if> value="desc">提交时间降</option>
+                              </select>
+                              <button type="submit" class="btn btn-purple btn-sm">
+                                 <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                    Search
+                              </button>
+							  &nbsp;&nbsp;&nbsp;&nbsp;
+							  <a class="btn btn-sm btn-default" href="{:U('auditlists',array('type'=>'table'))}"><i class="ace-icon fa fa-table"></i></a>
+							  
+							  <a class="btn btn-sm btn-default" href="{:U('auditlists')}"><i class="ace-icon fa fa-list"></i></a>
+                        </form>
+                        
+                        <div class="space-4"></div>
+                        <!-- PAGE CONTENT BEGINS -->
+                        <form id="export-form" method="post" action="">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="center"><input class="check-all" type="checkbox" value=""></th>
+                                    <th class="center">名称</th>
+                                    <th class="center">类型</th>
+									<th class="center">类别</th>
+									<th class="center">审核状态</th>
+                                    <th class="center">提交时间</th>
+                                    <th class="center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <volist name="list" id="val">
+                                    <tr>
+                                        <td class="center">
+                                            <input class="ids" type="checkbox" name="ids[]" value="{$val['id']}">
+											
+										</td>
+                                        <td class="center"><a id="file_name" data-toggle="popover" data-content="<img alt='150x150' src='__ROOT__/Public/upload/{$val.temp_name}' width='180' height='180'/>" href="{:U('see',array('id'=>$val['id']))}">{$val['file_name']}</a></td>
+                                        <td class="center">{$val['type']}</td>
+										<td class="center">{$val['attr']|getMediaAttr}</td>
+										<td class="center">{$val['auditstatus']||getAuditStatus}</td>
+										<td class="center">{$val['sub_time']|date='Y-m-d H:i',###}</td>
+                                        <td class="center">
+                                        <a href="{:U('auditsee',array('id'=>$val['id']))}">进入审核</a> 
+                                        </td>
+                                    </tr>
+                                </volist>
+                            </table>
+                        </form>
+						{$page}
+             			<div class="cf">
+                            <!--   <input id="submit"  href="javascript:;" class="btn btn-info" type="button" value="删除"> -->
+                        </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+					
+                </div><!-- /.row -->
+				
+            </div><!-- /.page-content -->
+			
+        </div>
+    </div><!-- /.main-content -->
+    <include file="Public/footer"/>
+
+</div><!-- /.main-container -->
+
+<include file="Public/footerjs"/>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+		$("[data-toggle='popover']").popover({
+        trigger : 'hover',//鼠标以上时触发弹出提示框
+        html:true,//开启html 为true的话，data-content里就能放html代码了
+        //content:"<img src='1.png'>"
+		});
+		</script>
+</body>
+</html>

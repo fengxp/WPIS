@@ -1,0 +1,11 @@
+#! /bin/bash
+#  author fengxp
+#  time  2016-12-22
+#  program : 从服务器同步文件
+eval `cat /var/eadv/conf/conf.ini`
+SERVER=$rsync_server;
+while true
+do
+/usr/bin/rsync -aLvz --progress --password-file=/var/eadv/rsyncd.pass pids@$SERVER::pids /var/eadv/data 2>&1
+sleep 10
+done

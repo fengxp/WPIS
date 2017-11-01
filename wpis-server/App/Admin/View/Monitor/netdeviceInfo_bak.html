@@ -1,0 +1,56 @@
+<include file="Public/head"/>
+<script src="__PUBLIC__/admin/js/ajax.js"></script>
+<script src="__PUBLIC__/admin/js/jquery.js"></script>
+<script src="__PUBLIC__/monitor/netrule.js"></script>
+<div class="table_full">
+<table class="table table-striped table-bordered table-hover">
+	<tr>
+		<th width="20%" >名称:</th>
+		<td width="80%">{$val.name}</td>
+		</td>
+	</tr>
+	<tr>
+		<th width="20%">类型</th>
+		<td width="80%">{$val.type|getDeviceType}</td>
+	</tr>
+	<tr>
+		<th width="20%">ID</th>
+		<td width="80%">{$val.id}</td>
+	</tr>
+	<tr>
+		<th width="20%">提交时间：</th>
+		<td width="80%">{$val.sub_time|date='Y-m-d H:i',###} </td>
+	</tr>
+	<tr style="display:{$hidden}" >
+		<th width="20%">IP地址1：</th>
+		<td width="80%">{$val.addr1}</td>
+	</tr>
+	<tr style="display:{$hidden}">
+		<th width="20%">IP地址2：</th>
+		<td width="80%">{$val.addr2}</td>
+	</tr>
+	<tr style="display:{$hidden}">
+		<th width="20%">MAC：</th>
+		<td width="80%" >{$val.mac}</td>	
+	</tr>
+	<tr style="display:{$hidden}" id="cpu_row">
+		<th width="20%" >CPU：</th>
+		<td width="80%" >{$val.cpu}</td>	
+		<input type="hidden" id="cpu" value="{$val.cpu}"/>
+	</tr>
+	<tr style="display:{$hidden}" id="memory_row">
+		<th width="20%" >内存：</th>
+		<td width="80%" >{$val.memory}</td>
+		<input type="hidden" id="memory" value="{$val.memory}"/>
+	</tr>
+	<tr style="display:{$hidden}" id="diskpercent_row">
+		<th width="20%">硬盘占比：</th>
+		<td width="80%">{$val.diskpercent}</td>
+		<input type="hidden" id="diskpercent" value="{$val.diskpercent}"/>
+	</tr>
+	
+</table>
+
+</div>
+
+

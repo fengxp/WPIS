@@ -1,0 +1,93 @@
+<include file="Public/headers"/>
+
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/openUploadify/openuploadify.css"/>
+
+
+ <div class="row">
+	<div class="col-xs-12">
+		<div class="space-4"></div>
+		<!-- PAGE CONTENT BEGINS -->
+		<form class="form-inline col-sm-12">
+			<div class="form-group ">
+				<label class="inline ">选择类别：&nbsp;&nbsp;</label>
+				<div class="inline">
+					{$attr|mySelect='MEDIA_ATTR',###}
+				</div>
+			</div>
+			<div class="space-4"></div>
+		</form>
+			
+			<div class="form-group">
+				<div class="col-sm-12"> <!-- 返回按钮  '<offset-5 居中> col-md-offset-1' -->
+					<div id="upload"></div>
+				</div>
+			</div>
+		
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+
+<include file="Public/footers"/>
+<script type="text/javascript" src="__PUBLIC__/openUploadify/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/openUploadify/jquery.openuploadify.js"></script>
+
+<script type="text/javascript">
+
+$(function(){
+	var filedata;
+	$('#upload').uploadify({
+		
+		auto:true,
+		fileTypeExts:'*.jpg;*.png;*.mp4',
+		multi:true,
+		formData:{
+			key:123456,
+			key2:'vvvv',
+			attr:$('#myselect option:selected').val(),
+			},
+		fileSizeLimit:9999999,
+		showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+		showUploadedSize:true,
+		removeTimeout:9999999,
+		uploader:"{:U(openupload)}",
+		onUploadStart:function(){
+			//alert('开始上传'); 
+			},
+		onInit:function(){
+			//alert('初始化');
+			},
+		onUploadComplete:function(file,data){
+			//alert('上传完成');
+			  console.log(data);
+			  filedata=data;
+			},
+		onCancel:function(file){
+			//console.log('删除的文件：'+file);
+			del(filedata);
+		}
+	});
+});
+
+function del(data){
+			
+		$.ajax({
+            type: "POST",
+            url: "{:U(opendel)}",
+            contentType: "application/json", //必须有
+            dataType: "", //表示返回值类型，不必须
+            data:  data, //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",JSON.stringify({ 'name': file}),
+            success: function (jsonResult) {
+                //alert(jsonResult);
+            }
+        });
+			
+}
+function getSelect()
+{
+
+}
+</script>
+</body>
+</html>
+

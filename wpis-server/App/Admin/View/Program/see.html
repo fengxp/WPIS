@@ -1,0 +1,74 @@
+<include file="Public/headers"/>
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<form class="form-horizontal" role="form" action="" method="post">
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 节目单名称: </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.name}">
+				</div>
+			</div>
+			
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 提交时间： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.sub_time|date='Y-m-d H:i',###}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+
+			<div class="widget-box transparent">
+				<div class="widget-header widget-header-small">
+					<h4 class="blue smaller">
+						<i class="icon-rss orange"></i>
+						素材列表:
+					</h4>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main padding-8">
+						<div id="profile-feed-1" class="profile-feed">
+						<volist name="imgList" id="mp"  key="index">	
+							<div class="profile-activity clearfix">
+								<div>
+									<span>{$index}</span>&nbsp;&nbsp;
+									<a target="_self" href=" {:U('Media/see',array('id'=>$mp['id']))}">{$mp.file_name}</a>
+								</div>
+							</div>
+						</volist>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="hr"></div>
+
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<div class="col-xs-2 col-md-offset-1"> <!-- 返回按钮  '<offset-5 居中>' -->
+					<button type="button" class="btn btn-purple" onclick="return window.history.go(-1)">返回</button>
+				</div>
+			</div>
+		</form>
+		
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+<script src="__PUBLIC__/qwadmin/js/jquery.slimscroll.js"></script>
+<script type="text/javascript">
+	jQuery(function($) {
+		//////////////////////////////
+		$('#profile-feed-1').slimScroll({
+			height: '250px',
+			alwaysVisible : true
+		});
+	});
+</script>

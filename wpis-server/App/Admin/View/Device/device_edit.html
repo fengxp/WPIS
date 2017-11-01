@@ -1,0 +1,44 @@
+﻿<include file="Public/head"/>
+<form action="" method="POST">
+<div class="table_full">
+<table class="table  table-bordered table-hover">
+	<tr>
+		<th width="20%" >名称:</th>
+		<td width="80%"><input  name="name"  class="input" size="20" value="{$val.name}" /></td>
+		</td>
+	</tr>
+	<tr>
+		<th width="20%">类型</th>
+		<td width="80%">{$val.type|mySelect='DEVICE_TYPE',###,'disabled'}</td>
+	</tr>
+	
+	<tr style="display:{$hidden}" >
+		<th width="20%">IP地址1：</th>
+		<td width="80%"><input  name="addr1"  class="input" size="20" value="{$val.addr1}" /></td>
+	</tr>
+	<tr style="display:{$hidden}">
+		<th width="20%">IP地址2：</th>
+		<td width="80%"><input  name="addr2"  class="input" size="20" value="{$val.addr2}" /></td>
+	</tr>
+	<tr style="display:{$hidden}">
+		<th width="20%">MAC：</th>
+		<td width="80%" ><input  name="mac"  class="input" size="20" value="{$val.mac}" /></td>
+		
+	</tr>
+	
+</table>
+</div>
+<div class="btn_wrap">
+  <div class="btn_wrap_pd">
+    &nbsp;&nbsp;
+    <input name="id" type="hidden" value="{$val.id}">
+	<input name="type" type="hidden" value="{$val.type}">
+    <button class="btn btn_submit mr10 " type="submit">提交</button>
+	<button class="btn btn-info " onclick="return window.history.go(-1)">返回</button>
+  </div>
+</div>
+</form>
+
+
+</body>
+</html>

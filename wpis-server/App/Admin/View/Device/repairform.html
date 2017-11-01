@@ -1,0 +1,242 @@
+<include file="Public/head" />
+<body class="no-skin">
+	<include file="Public/header" />
+	<link rel="StyleSheet" href="__DTREE__/dtree.css" type="text/css" />
+	<script type="text/javascript" src="__DTREE__/dtree.js"></script>
+	<script src="__PUBLIC__/admin/js/jquery.js"></script>
+	<script src="__PUBLIC__/admin/js/ajax.js"></script>
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<include file="Public/sidebar" />
+		<div class="main-content">
+			<div class="main-content-inner">
+				<!-- #section:basics/content.breadcrumbs -->
+				<include file="Public/breadcrumbs" />
+
+				<!-- /section:basics/content.breadcrumbs -->
+				<div class="page-content">
+					<include file="Public/set" />
+
+					<!-- /section:settings.box -->
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal" id="form" name="form"
+								action="{:u('repairupdate')}" method="post" onsubmit="return check();">
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1"> 维修单编号</label>
+									<div class="col-sm-9">
+										<input type="text" name="repairnum" id="repairnum" 
+											class="col-xs-10 col-sm-5" value="{$repairnum}"> 
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1"> 维修单名称</label>
+									<div class="col-sm-9">
+										<input type="text" name="name" id="name" 
+											class="col-xs-10 col-sm-5" value=""> 
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1"> 维修单人</label>
+									<div class="col-sm-9">
+										<input type="text" name="repairer" id="repairer" 
+											class="col-xs-10 col-sm-5" value="">
+									</div>
+								</div>
+								
+								<div class="space-4"></div>
+                                
+                            	<div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" for="id-date-picker-1">维修开始时间</label>
+                                <div class="col-xs-9 col-sm-9">
+                                    <div class="input-group col-xs-5">
+
+                                        <input class="form-control" id="begindate" name="begindate" value="<if condition="
+                                               $member['begindate'] neq '' ">{$member['begindate']|date="Y-m-d",###}</if>"
+                                        type="text" data-date-format="dd-mm-yyyy" />
+                                        <span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar bigger-110"></i>
+												</span>
+
+                                    </div>
+                                </div>
+                            	</div>
+                            	
+								<div class="space-4"></div>
+                                <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" for="id-date-picker-2">维修结束时间</label>
+                                <div class="col-xs-9 col-sm-9">
+                                    <div class="input-group col-xs-5">
+
+                                        <input class="form-control" id="enddate" name="enddate" value="<if condition="
+                                               $member['enddate'] neq '' ">{$member['enddate']|date="Y-m-d",###}</if>"
+                                        type="text" data-date-format="dd-mm-yyyy" />
+                                        <span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar bigger-110"></i>
+												</span>
+
+                                    </div>
+                                </div>
+                            	</div>
+                            	
+								<div class="space-4"></div>
+							
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1"> 设备选择 </label>
+									<div class="col-sm-9">
+										<div class="col-sm-5">
+											<!-- 新增 -->
+											<div class="row">
+												<div class="widget-box">
+													<div class="widget-header">
+														<h4 class="widget-title">
+															<label> <span class="lbl"> 设备树</span>
+															</label>
+														</h4>
+													</div>
+					
+													<div class="widget-body">
+														<div class="widget-main row">
+															<p>
+																<a href="javascript: d.openAll();">展开</a> | <a
+																	href="javascript: d.closeAll();">合并</a>
+															</p>
+															<br>
+															<div id="myTree"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- 新增 -->
+											<input name="id" id="id" type="hidden" value="">
+											<input name="device" id="device" type="hidden" value="">
+											<script type="text/javascript">									
+												$(function() {
+													creatDtree();
+													d.openAll();
+												});
+												var dtroot = "__DTREE__";
+												d = new dTree('d');			
+												d.config.check = true;
+												function creatDtree() {
+													$.ajax({
+																url : "{:U('Group/getDevice')}",
+																async : false,//同步，等这个请求完成后才继续往下执行,这样myTree才能使用返回来的数据  
+																dataType : "json",
+																success : function(myData) {
+																	//alert(myData);
+																	for (var i = 0; i < myData.length; i++) {
+																		var obj = myData[i];
+																		//alert(obj.id);
+																		//right是window.parent的一个frame的name  
+																		d.add(obj.id,obj.p_id,obj.name,"","","");
+																	}
+																	document.getElementById('myTree').innerHTML = d;
+																	//d.defaultChecked("{$group.device}");
+																}
+													
+															});
+													d.config.useCookies = false;
+													d.config.inOrder = true;
+
+												}
+												function getSelect() {
+													var strSelect = d.getText();
+													//parent.window.document.getElementById("device").value=strSelect;
+
+												}
+											</script>
+										</div>
+									</div>
+								</div>
+							
+
+								<div class="col-md-offset-1 col-md-9">
+									<button class="btn btn-info submit" type="button">
+										<i class="icon-ok bigger-110"></i> 提交
+									</button>
+								</div>
+							</form>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+		</div>
+		<!-- /.main-content -->
+		<include file="Public/footer" />
+
+	</div>
+	<!-- /.main-container -->
+	<include file="Public/footerjs" />
+	<script src="__PUBLIC__/qwadmin/js/date-time/bootstrap-datepicker.js"></script>
+	<script src="__PUBLIC__/qwadmin/js/bootbox.js"></script>
+	<!-- inline scripts related to this page -->
+	
+	<script>
+    jQuery(function ($) {
+        $('#begindate').datepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            autoclose: true,
+            todayBtn: 'linked',
+            language: 'cn'
+        });
+        $('#enddate').datepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            autoclose: true,
+            todayBtn: 'linked',
+            language: 'cn'
+        });
+        $(".children").click(
+    			function() {
+    				$(this).parent().parent().parent().parent().find(".father")
+    						.prop("checked", true);
+    			}); 
+    	$(".father").click(
+    			function() {
+    				if (this.checked) {
+    					$(this).parent().parent().parent().parent().find(
+    							".children").prop("checked", true);
+    				} else {
+    					$(this).parent().parent().parent().parent().find(
+    							".children").prop("checked", false);
+    				}
+    			}); 
+    	$(".submit").click(function() {
+    		$('#form').submit();
+
+    	}) 
+    });
+
+</script>
+</body>
+</html>
+<script>
+	function check() {
+		var device = window.d.getText();
+		if (device == '') {
+			//alert("请选择设备")
+			return true;
+		} else {
+			window.document.getElementById("device").value = device;
+		}
+		return true;
+	}
+</script>

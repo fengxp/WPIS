@@ -1,0 +1,133 @@
+<include file="Public/head"/>
+<body class="no-skin">
+<include file="Public/header"/>
+<div class="main-container" id="main-container">
+    <script type="text/javascript">
+        try {
+            ace.settings.check('main-container', 'fixed')
+        } catch (e) {
+        }
+    </script>
+
+    <include file="Public/sidebar"/>
+    <div class="main-content">
+        <div class="main-content-inner">
+            <!-- #section:basics/content.breadcrumbs -->
+            <include file="Public/breadcrumbs"/>
+
+            <!-- /section:basics/content.breadcrumbs -->
+            <div class="page-content">
+                <include file="Public/set"/>
+
+                <!-- /section:settings.box -->
+                <div class="row">
+                    <div class="col-xs-12">
+						
+                        <form class="form-inline" action="" method="get">
+                             <a class="btn btn-info" href="{:U('add')}" value="">新增</a>
+                             <label class="inline">&nbsp;&nbsp;名称：</label>
+                             <input type="text" name="keyword" value="{:I(keyword)}" class="form-control">
+                             <label class="inline">&nbsp;&nbsp;排序：</label>
+                             <select name="order" class="form-control">
+                                <option <if condition="I('order') eq asc">selected</if> value="asc">提交时间升</option>
+                                <option <if condition="I('order') eq desc">selected</if> value="desc">提交时间降</option>
+                              </select>
+                              <button type="submit" class="btn btn-purple btn-sm">
+                                 <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                    Search
+                              </button>
+							  &nbsp;&nbsp;&nbsp;&nbsp;
+							  <a class="btn btn-sm btn-default" href="{:U('lists',array('type'=>'table'))}"><i class="ace-icon fa fa-table"></i></a>
+							  
+							  <a class="btn btn-sm btn-default" href="{:U('lists')}"><i class="ace-icon fa fa-list"></i></a>
+                        </form>
+                        
+                        <div class="space-4"></div>
+                        <!-- PAGE CONTENT BEGINS -->
+
+								<div class="row-fluid">
+									<ul class="ace-thumbnails">
+									<volist name="list" id="val">
+										<li>
+											<a href="__ROOT__/Public/upload/{$val['temp_name']}" data-rel="colorbox">
+												<img alt="150x150" src="__ROOT__/Public/upload/{$val['temp_name']}" width="180" height="180"/>
+												<div class="text">
+													<div class="inner">Sample Caption on Hover</div>
+												</div>
+											</a>
+
+											<div class="tools tools-bottom">
+												
+												<a href="{:U('see',array('id'=>$val['id'],'type'=>'table'))}">
+													<i class="ace-icon fa fa-search-plus"></i>
+												</a>
+												<a href="{:U('edit',array('id'=>$val['id'],'type'=>'table'))}">
+													<i class="ace-icon fa fa-pencil-square-o"></i>
+												</a>
+												<a href="{:U('delete',array('id'=>$val['id'],'type'=>'table'))}">
+													<i class="ace-icon fa fa-times"></i>
+												</a>
+
+											</div>
+										</li>
+										</volist>
+									</ul>
+								</div><!-- PAGE CONTENT ENDS -->
+								
+						
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+					
+                </div><!-- /.row -->
+				{$page}
+            </div><!-- /.page-content -->
+			
+        </div>
+    </div><!-- /.main-content -->
+    <include file="Public/footer"/>
+
+</div><!-- /.main-container -->
+
+<include file="Public/footerjs"/>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+$("#submit").click(function () {
+            bootbox.confirm({
+                title: "系统提示",
+                message: "是否确定删除？",
+                callback: function (result) {
+                    if (result) {
+                        $("#export-form").submit();
+                    }
+                },
+                buttons: {
+                    "cancel": {"label": "取消"},
+                    "confirm": {
+                        "label": "确定",
+                        "className": "btn-danger"
+                    }
+                }
+            });
+        });
+        $(".del").click(function () {
+            var url = $(this).attr('val');
+            bootbox.confirm({
+                title: "系统提示",
+                message: "是否确定删除?",
+                callback: function (result) {
+                    if (result) {
+                        window.location.href = url;
+                    }
+                },
+                buttons: {
+                    "cancel": {"label": "取消"},
+                    "confirm": {
+                        "label": "确定",
+                        "className": "btn-danger"
+                    }
+                }
+            });
+        });
+		</script>
+</body>
+</html>

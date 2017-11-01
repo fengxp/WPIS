@@ -1,0 +1,65 @@
+<include file="Public/head" />
+<script type="text/javascript" src="__ECHARTS__/echarts.js"></script>
+<script type="text/javascript" src="__ECHARTS__/zrender.js"></script>
+<script src="__PUBLIC__/admin/js/ajax.js"></script>
+<script src="__PUBLIC__/admin/js/jquery.js"></script>
+<body class="no-skin">
+	<include file="Public/header" />
+	<div class="main-container" id="main-container">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('main-container', 'fixed')
+			} catch (e) {
+			}
+		</script>
+		<include file="Public/sidebar" />
+		<div class="main-content">
+			<div class="main-content-inner">
+				<!-- #section:basics/content.breadcrumbs -->
+				<include file="Public/breadcrumbs" />
+				<!-- /section:basics/content.breadcrumbs -->
+				<div class="page-content">
+					<include file="Public/set" />
+					<div class="row">
+						<div class="col-xs-12">
+							<div id="main" style="width: 1024px; height: 400px;"></div>
+
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+		</div>
+		<!-- /.main-content -->
+		<include file="Public/footer" />
+	</div>
+	<!-- /.main-container -->
+	<include file="Public/footerjs" />
+</body>
+</html>
+<script type="text/javascript">
+var myChart = echarts.init(document.getElementById('main'));
+								// 指定图表的配置项和数据
+								var option = {
+									title : {
+										text : '与广告供应商签订合同数量统计(全年)'
+									},
+									tooltip : {},
+									legend : {
+										data : [ '全年广告统计' ]
+									},
+									xAxis : {
+										data :{$xcoordinate}
+									},
+									yAxis : {},
+									series : [ {
+										name : '数量(个)',
+										type : 'bar',
+										data : {$ycoordinate}
+									} ]
+								};
+								// 使用刚指定的配置项和数据显示图表。
+								myChart.setOption(option);
+</script>

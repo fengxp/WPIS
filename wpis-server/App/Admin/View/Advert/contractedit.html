@@ -1,0 +1,171 @@
+<include file="Public/head"/>
+<body class="no-skin">
+<include file="Public/header"/>
+<script src="__PUBLIC__/admin/js/jquery.js"></script>
+<script src="__PUBLIC__/admin/js/ajax.js"></script>
+<div class="main-container" id="main-container">
+<script type="text/javascript">
+try {
+		ace.settings.check('main-container', 'fixed')
+	} catch (e) {
+				}
+</script>
+<include file="Public/sidebar" />
+	<div class="main-content">
+		<div class="main-content-inner">
+			<!-- #section:basics/content.breadcrumbs -->
+			<include file="Public/breadcrumbs" />
+			<!-- /section:basics/content.breadcrumbs -->
+			<div class="page-content">
+				<include file="Public/set" />
+				<!-- /section:settings.box -->
+					<div class="row">
+						<div class="col-xs-12">
+							<!-- PAGE CONTENT BEGINS -->
+							<form class="form-horizontal" id="form" name="form" action="{:u('contractupdate')}" method="post">
+								<div class="space-4"></div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1">合同编号</label>
+									<div class="col-sm-9">
+										<input type="text" name="contractnum" id="contractnum" 
+											class="col-xs-10 col-sm-5" value="{$val.contractnum}"> 
+									</div>
+								</div>
+							
+								<div class="space-4"></div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1">合同名称</label>
+									<div class="col-sm-9">
+										<input type="text" name="name" id="name" 
+											class="col-xs-10 col-sm-5" value="{$val.name}"> 
+									</div>
+								</div>
+								
+								<div class="space-4"></div>
+							    <div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right" for="form-field-1">合同类型： </label>
+									<div class="col-sm-9">
+									{$val.type|mySelect='CONTRACT_TYPE',###}
+									 <input type="hidden" name="type" id="type" value="{$val.type}">
+									</div>
+								</div>											
+								<input name="id" id="id" type="hidden" value="{$val.id}">
+								
+								<div class="space-4"></div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1">广告供应商</label>
+									<div class="col-sm-9">
+										<input type="text" name="advertiser" id="advertiser" 
+											class="col-xs-10 col-sm-5" value="{$val.advertiser}"> 
+									</div>
+								</div>
+								
+								<div class="space-4"></div>
+								<div class="form-group">
+									<label class="col-sm-1 control-label no-padding-right"
+										for="form-field-1">联系人</label>
+									<div class="col-sm-9">
+										<input type="text" name="contracts" id="contracts" 
+											class="col-xs-10 col-sm-5" value="{$val.contracts}"> 
+									</div>
+								</div>
+																							
+								<div class="space-4"></div>                              
+                            	<div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" for="id-date-picker-1">合同开始时间</label>
+                                <div class="col-xs-9 col-sm-9">
+                                    <div class="input-group col-xs-5">
+
+                                        <input class="form-control" id="begindate" name="begindate" value="<if condition="
+                                               $val['begindate'] neq '' ">{$val['begindate']|date="Y-m-d",###}</if>"
+                                        type="text" data-date-format="dd-mm-yyyy" />
+                                        <span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar bigger-110"></i>
+												</span>
+
+                                    </div>
+                                </div>
+                            	</div>
+                            	
+								<div class="space-4"></div>
+                                <div class="form-group">
+                                <label class="col-sm-1 control-label no-padding-right" for="id-date-picker-2">合同结束时间</label>
+                                <div class="col-xs-9 col-sm-9">
+                                    <div class="input-group col-xs-5">
+
+                                        <input class="form-control" id="enddate" name="enddate" value="<if condition="
+                                               $val['enddate'] neq '' ">{$val['enddate']|date="Y-m-d",###}</if>"
+                                        type="text" data-date-format="dd-mm-yyyy" />
+                                        <span class="input-group-addon">
+													<i class="ace-icon fa fa-calendar bigger-110"></i>
+												</span>
+
+                                    </div>
+                                </div>
+                            	</div>
+                            									
+								<div class="space-4"></div>                                
+								<div class="col-md-offset-1 col-md-9">
+								<button type="button" class="btn btn-purple" onclick="return window.history.go(-1)">返回</button>
+									<button class="btn btn-info submit" type="button">提交</button>
+								</div>
+							</form>
+							<!-- PAGE CONTENT ENDS -->
+						</div>
+						<!-- /.col -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.page-content -->
+			</div>
+		</div>
+		<!-- /.main-content -->
+		<include file="Public/footer" />
+	</div>
+	<!-- /.main-container -->
+	<include file="Public/footerjs" />
+	<script src="__PUBLIC__/qwadmin/js/date-time/bootstrap-datepicker.js"></script>
+	<script src="__PUBLIC__/qwadmin/js/bootbox.js"></script>
+	<!-- inline scripts related to this page -->
+	<script>
+    jQuery(function ($) {
+    	$('#begindate').datepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            autoclose: true,
+            todayBtn: 'linked',
+            language: 'cn'
+        });
+        $('#enddate').datepicker({
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            autoclose: true,
+            todayBtn: 'linked',
+            language: 'cn'
+        });
+        $(".children").click(
+    			function() {
+    				$(this).parent().parent().parent().parent().find(".father")
+    						.prop("checked", true);
+    			}); 
+    	$(".father").click(
+    			function() {
+    				if (this.checked) {
+    					$(this).parent().parent().parent().parent().find(
+    							".children").prop("checked", true);
+    				} else {
+    					$(this).parent().parent().parent().parent().find(
+    							".children").prop("checked", false);
+    				}
+    			}); 
+    	$(".submit").click(function() {
+    		$("#type").val($("#myselect").val());
+    		$('#form').submit();
+    	}) 
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<include file="Public/headers"/>
+<link rel="stylesheet" href="__PUBLIC__/admin/css/layout.css"/>
+
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<form class="form-horizontal" role="form" action="{:U('add',array('m_type'=>$m_type))}" method="post">
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 节目单名称: </label>
+				<div class="col-sm-8">
+					<input type="text"  class="col-sm-5 input-sm" id="ProgName"
+					name="ProgName"  maxlength="100" value="{$name}">
+				</div>
+			</div>
+			
+			<div class="space-4"></div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-5">
+					<div class="widget-box">
+						<div class="widget-header">
+							<h4>选择区</h4>
+						</div>
+						<div class="widget-body">
+							<iframe id="ifrimglist" class="iframe-imglist"
+										src="{:U('mediaList',array('m_type'=>$m_type))}"></iframe>
+						</div>
+					</div>
+				</div><!-- /span -->
+
+				<div class="col-xs-12 col-sm-2">
+					<div class="widget-box">
+						<div class="widget-header">
+							<h4>操作区</h4>
+						</div>
+						<div class="opbutton center">
+							<div class="space-4"></div>
+							<button type="button" class="btn btn-primary" onclick="selectAll()">
+								<i class="ace-icon fa fa-check icon-on-right bigger-110"></i> 全选 
+							</button>
+							<button type="button" class="btn btn-primary" onclick="clearAll()">
+								<i class="ace-icon fa fa-times icon-on-right bigger-110"></i> 取消 
+							</button>
+							<button type="button" class="btn btn-primary" onclick="addItem()">
+								<i class="ace-icon fa fa-plus icon-on-right bigger-110"></i> 加入 
+							</button>
+							<button type="button" class="btn btn-primary" onclick="removeItem()">
+								<i class="ace-icon fa fa-minus icon-on-right bigger-110"></i> 删除 
+							</button>
+							<button type="button" class="btn btn-primary" onclick="clearTr()">
+								<i class="ace-icon fa fa-refresh icon-on-right bigger-110"></i> 清空 
+							</button>
+							<button type="button" class="btn btn-primary" onclick="moveUP()">
+								<i class="ace-icon fa fa-arrow-up icon-on-right bigger-110"></i> 上移 
+							</button>
+							<button type="button" class="btn btn-primary" onclick="moveDown()">
+								<i class="ace-icon fa fa-arrow-down icon-on-right bigger-110"></i> 下移 
+							</button>
+							<button type="submit" class="btn btn-success" onclick="return submitCheck();">
+								<i class="ace-icon fa fa-spinner icon-on-right bigger-110"></i> 提交  
+							</button>
+						  </div>
+						
+					</div>
+				</div><!-- /span -->
+
+				<div class="col-xs-12 col-sm-5">
+					<div class="widget-box">
+						<div class="widget-header">
+							<h4>编辑区</h4>
+						</div>
+
+						<div class="widget-body iframe-imglist " id="profile-feed-1">
+							<table id="tabImgList" class="table table-hover">
+							</table>
+						</div>
+					</div>
+				</div><!-- /span -->
+			</div><!-- /row -->
+			<input type="hidden" name="ids" id="ids" />
+		</form>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+<script src="__PUBLIC__/admin/js/program.js"></script>
+<script src="__PUBLIC__/qwadmin/js/jquery.slimscroll.js"></script>
+<script type="text/javascript">
+	jQuery(function($) {
+		//////////////////////////////
+		$('#profile-feed-1').slimScroll({
+			height: '450px',
+			alwaysVisible : true
+		});
+	});
+</script>
+</body>
+</html>
+

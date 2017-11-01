@@ -1,0 +1,98 @@
+<include file="Public/headers"/>
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<form class="form-horizontal" action="{:U('auditupdate',array('id'=>$val['id']))}" method="post">
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 用户名称: </label>
+				<div class="col-sm-9">
+				<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.file_name}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 类型： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.type}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 类别： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.attr|getMediaAttr}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 文件大小： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.size}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 审核状态： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.auditstatus||getAuditStatus}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 提交时间： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.sub_time|date='Y-m-d H:i',###}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 存储名称： </label>
+				<div class="col-sm-9">
+					<input type="text" disabled="disabled" class="rcol-xs-10 col-sm-5"
+						   value="{$val.temp_name}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-4"> 预览： </label>
+					<div class="col-xs-10 col-sm-5">{$val.temp_name|preview_media}</div>
+			</div>
+			<div class="space-4"></div>
+		    <input id="auditstatus" name="auditstatus" type="hidden" value=""> 
+			<div class="form-group">
+				<div class="col-xs-6 col-md-offset-1"> <!-- 返回按钮  '<offset-5 居中>' -->
+					<button type="button" class="btn btn-purple" onclick="return window.history.go(-1)">返回</button>
+					<button id="auditaccess" type="submit" class="btn btn-primary mr10" >审核通过</button>
+					<button id="auditnotaccess" type="submit" class="btn btn-grey" >审核不通过</button>
+				</div>
+			</div>
+		</form>
+		
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+<script type="text/javascript">
+    $(function () {
+        $("#auditaccess").click(function () {
+         $("#auditstatus").val("审核通过");
+        });
+        $("#auditnotaccess").click(function () {
+         $("#auditstatus").val("审核不通过");
+        });
+    })
+</script>

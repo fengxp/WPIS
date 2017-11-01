@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+        echo "vlcStart url";
+	vlc=`ps -e|grep vlc |awk '{print $1}'`;
+	kill -9 $vlc
+	exit;
+else
+	URL=$1
+fi
+        
+sleep 1;
+#/usr/bin/vlc --volume 720 --no-video-title-show --play-and-exit --global-key-loop 1 --width 768 --height 665 --video-x 256 --video-y 0 --aspect-ratio 768:665 $URL >/root/vlc.log 2>&1
+
+/usr/bin/vlc --fullscreen --no-video-title-show --play-and-exit --global-key-loop 1 $URL >/root/vlc.log 2>&1
+

@@ -1,0 +1,224 @@
+<include file="Public/head"/>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-12">
+		<!-- PAGE CONTENT BEGINS -->
+			<div class="space-4"></div>
+			<div id="alert" class="alert alert-block alert-success " >
+				<marquee id="marquee" scrollamount="6"><span style="font-size:30px;color:#fff" id="mar_text" ></span></marquee>
+			</div>
+			
+			<div class="space-4"></div>
+			<div class="inline">
+				<div class="col-xs-6">
+					<div class="input-group">
+						<div class="input-group-addon">宽度</div>
+						<input name="width" class=" " id="width" type="number" placeholder="" maxlength="4"  value="{$width}">
+					</div>
+					<div class="space-4"></div>
+					
+					<div id="slider" class="col-xs-11"></div>
+					
+				</div>
+			
+				<div class="col-xs-6 ">
+					<div class="input-group">
+						<div class="input-group-addon">高度</div>
+						<input name="height" class="" id="height" type="number" placeholder="" maxlength="4"  value="{$height}">
+					</div>
+					<div class="space-4"></div>
+					
+					<div id="slider_height" class="col-xs-11"></div>
+					
+				</div>
+			</div>
+			
+			<div class="space-4"></div>
+			<div class="inline">
+				<div class="col-xs-6">
+					<div class="input-group">
+						<div class="input-group-addon">颜色</div>
+						<input name="color" id="color" class="jscolor" value="#fff">
+					</div>	
+				</div>
+				
+				<div class="col-xs-6 ">
+					<div class="input-group">
+						<div class="input-group-addon">大小</div>
+						<select name='size' id="size">
+						  <option value ="2">  2  </option>
+						  <option value ="4">  4  </option>
+						  <option value ="6">  6  </option>
+						  <option value ="8">  8  </option>
+						  <option value ="10">  10  </option>
+						  <option value ="20">  20  </option>
+						  <option value ="30" selected>  30  </option>
+						  <option value ="40">  40  </option>
+						  <option value ="50">  50  </option>
+						  <option value ="60">  60  </option>
+						  <option value ="70">  70  </option>
+						  <option value ="80">  80  </option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="space-4"></div>
+			<div class="inline">
+				<div class="col-xs-6">
+					<div class="input-group">
+						<div class="input-group-addon">方向</div>
+						<select name='direction' id="direction">
+						  <option value ="left">  左  </option>
+						  <option value ="right">  右  </option>
+						  <option value ="up">  上  </option>
+						  <option value ="down">  下  </option>
+						</select>
+					</div>
+				</div>
+			
+				<div class="col-xs-6 ">
+					<div class="input-group">
+						<div class="input-group-addon">速度</div>
+						<select name='speed' id="speed">
+						  <option value ="2">  2  </option>
+						  <option value ="4">  4  </option>
+						  <option value ="6" selected>  6  </option>
+						  <option value ="8">  8  </option>
+						  <option value ="10">  10  </option>
+						</select>
+					</div>	
+				</div>
+			</div>
+			<div class="space-4"></div>
+			<div class="col-xs-12 col-sm-4">
+			<div class="widget-box">
+				<div class="widget-header">
+					<h4>Text Area</h4>
+					<div class="widget-toolbar">
+					</div>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main">
+						<div>
+							<textarea id="content" name="content" class="form-control" id="form-field-8" placeholder="Default Text">欢迎使用PIDS系统</textarea>
+						</div>
+
+						
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="space-4"></div>
+			<div class="inline">
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-info" id="button"><i class="bigger-110"></i>确定</button>&nbsp; &nbsp;
+					<button type="button" class="btn btn-info" id="close"><i class="bigger-110"></i>关闭</button>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
+					<button type="button" class="btn btn-danger " id="delete"><i class="fa fa-trash-o bigger-110"></i>删除</button>
+				</div>
+			</div>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footerjs"/>
+<script src="__PUBLIC__/admin/js/jscolor.min.js"></script>
+<script>
+var info_id="info"+'{$info_id}';
+var getHeight=window.parent.document.getElementById(info_id).offsetHeight;
+var getWidth=window.parent.document.getElementById(info_id).offsetWidth;
+var BgWidth = window.parent.document.getElementById('bg_width').value;
+var BgHeight = window.parent.document.getElementById('bg_height').value;
+var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+
+	$('#button').click(function(){
+		var m_width = $('#width').val();
+		var m_height = $('#height').val();
+		if(m_height == ''){
+			layer.tips('请输入高度','#height',{
+				tips: 3
+			});
+			return false;
+		}
+		if(m_width == ''){
+			layer.tips('请输入宽度', '#width',{
+				tips: 3
+			});
+			return false;
+		}
+		if(parseInt(m_height)>BgHeight){
+			layer.tips('高度应小于'+BgHeight, '#height',{
+				tips: 3
+			});
+			return false;
+		}
+		if(parseInt(m_width)>BgWidth){
+			layer.tips('宽度应小于'+BgWidth, '#width',{
+				tips: 3
+			});
+			//layer.msg('新密码不能使用原密码');
+			return false;
+		}
+		window.parent.document.getElementById(info_id).style.height=parseInt(m_height)+'px';
+		window.parent.document.getElementById(info_id).style.width=parseInt(m_width)+'px';
+		
+        //parent.layer.close(index); //关闭窗口
+	
+		var m_color = "#"+$('#color').val();
+		var m_direction = $('#direction').val();
+		var m_size = $('#size').val()+'px';
+		var m_speed = $('#speed').val();
+		var m_content = $('#content').val();
+		$("#mar_text").css({"color":m_color,"font-size":m_size});
+		$("#mar_text").text(m_content);
+		$("marquee").attr("scrollamount",m_speed);
+		$("marquee").attr("direction",m_direction);
+		//window.parent.document.getElementById(info_id).style.backgroundImage= "";
+		window.parent.document.getElementById(info_id).innerHTML="<marquee id='' scrollamount="+m_speed+" direction="+m_direction+" style='width:100%;height:100%;' ><span style='font-size:"+m_size+";color:"+m_color+"' id='mar_text' >"+m_content+"</span></marquee>";
+
+		var txtVal = m_color+":"+m_direction+":"+m_size+":"+m_speed+":"+m_content;
+		window.parent.document.getElementById(info_id+"_txt").value=txtVal;
+		 
+	});
+	$('#delete').click(function(){
+		window.parent.document.getElementById(info_id).innerHTML="";
+		window.parent.document.getElementById(info_id).style.display="none";
+		window.parent.document.getElementById(info_id).style.position='absolute';
+		window.parent.document.getElementById(info_id).style.left="0";
+		window.parent.document.getElementById(info_id).style.top="0";
+		window.parent.document.getElementById(info_id+"_txt").value="";
+		parent.layer.close(index); //关闭窗口
+	});
+	$('#close').click(function(){
+		parent.layer.close(index); //关闭窗口
+	});
+
+  $(function() {
+    $( "#slider" ).slider({
+		range: "max",
+		min: 1,
+		max: 1920,
+		value: getWidth,
+		slide: function( event, ui ) {
+			$( "#width" ).val( ui.value );
+			window.parent.document.getElementById(info_id).style.width=parseInt(ui.value)+'px';
+		}
+	});
+	$( "#slider_height" ).slider({
+		range: "max",
+		min: 1,
+		max: 1920,
+		value: getHeight,
+		slide: function( event, ui ) {
+			$( "#height" ).val( ui.value );
+			window.parent.document.getElementById(info_id).style.height=parseInt(ui.value)+'px';
+		}
+	
+	});
+	$('#width').val(getWidth);
+	$('#height').val(getHeight);
+  });
+
+</script>
+</body>
+</html>

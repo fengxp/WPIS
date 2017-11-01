@@ -1,0 +1,97 @@
+﻿<include file="Public/headers"/>
+<div class="row">
+	<div class="col-xs-12">
+		<form action="{:U('imgprogramtosave')}" method="post" onsubmit="return check();">
+			<div class="row">
+				<div class="col-xs-3">
+					<iframe margin-left="0px" id="left" name="left" frameborder="0" scrolling="no"
+												 height="500" src="{:U('device')}" style="background:#F9F9F9;"></iframe>
+				</div>
+				<div class="col-xs-9" id="timeset">
+					<iframe id="right" name="right" frameborder="0" scrolling="no"
+												 width="100%" height="500"
+												src="{:U('proLists')}"></iframe>
+				</div>
+			</div>
+			<input name="device" id="device" type="hidden" value="">
+			<input name="program" id="program" type="hidden" value="">
+			<input name="begindate" id="begindate" type="hidden" value="">
+			<input name="enddate" id="enddate" type="hidden" value="">
+			<input name="rules" id="rules" type="hidden" value="">
+			<input type="hidden" id="name" name="name"  value="" />
+
+			<div class="row">
+				<div class="col-sm-12 col-md-offset-3" >  
+				  <div class="checkbox">
+					<label><input id="atonce" name="atonce" type="checkbox" value="1" class="ace">
+						<span class="lbl">即时播放</span>
+					</label>
+				  </div>	
+					  
+				</div>
+			</div>
+
+			<div class="row">
+			<div class="col-sm-12 col-md-offset-3">	
+				<button id="select-bg" class="btn btn-purple"><i class="icon-undo bigger-110"></i>选择图片</button>
+				
+				&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" type="submit">提交</button>
+				<a href="{:U(videoindex)}" class="btn btn-grey">返回</a>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+
+           </div><!-- /.page-content -->
+        </div>
+    </div><!-- /.main-content -->
+    <include file="Public/footer"/>
+</div><!-- /.main-container -->
+<include file="Public/footerjs"/>
+</body>
+</html>
+<script>
+	function check() {
+		var begindate=right.window.document.getElementById("begindate").value;
+		var enddate=right.window.document.getElementById("enddate").value;		
+		var rules=right.window.document.getElementById("rules").value;
+		var device = left.window.d.getText();
+		var program = window.document.getElementById("program").value;
+		if (device == '') {
+			alert("请选择设备")
+			return false;
+		} else {
+			window.document.getElementById("device").value = device;
+			window.document.getElementById("begindate").value=begindate;
+			window.document.getElementById("enddate").value=enddate;
+			window.document.getElementById("rules").value=rules;
+		}
+		if (program == '') {
+			alert("请选择节目单")
+			return false;
+		}
+		return true;
+	}
+	$("#select-bg").click(function () {
+		layer.open({
+			type: 2,
+			closeBtn: 2,
+			area: ['800px', '500px'],
+			shadeClose: true,
+			title: '选择图片节目单',
+			content: '{:U("imgdialogproLists")}'
+		});
+		return false;
+    });
+	$("#atonce").click(function(){
+		if($('#atonce').is(':checked')) {
+			//alert("checked");
+			$("#timeset").hide();
+		}else{
+			$("#timeset").show();
+			//alert("nochecked");
+		}
+
+	});
+</script>

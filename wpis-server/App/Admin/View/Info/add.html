@@ -1,0 +1,79 @@
+﻿<include file="Public/headers"/>
+<div class="row">
+	<div class="col-md-12">
+		<!-- PAGE CONTENT BEGINS -->
+			<div class="row">
+				<div class="col-md-4">
+					<iframe id="left" name="left" frameborder="0" height="500" width="100%"  scrolling="no" src="{:U('device')}" style="background:#F9F9F9;"></iframe>
+				</div>
+				<div class="col-md-7 ">
+						<label class="col-sm-2 " > 发布信息 </label>
+						<form action="{:U('save')}" method="post" onsubmit="return check();">
+							<table class="table table-hover">
+								<tr>
+									<th width="20%">标题：</th>
+									<td width="80%">
+									<input type="text" id="title" name="title" class="input" size="40" value="" />
+									</td>
+								</tr>
+								<tr>
+									<th width="20%">播放时长：</th>
+									<td width="80%">
+									<input type="text" id="length" name="length" class="input" size="40" value="30" />&nbsp;分钟
+									</td>
+								</tr>
+								<tr>
+									<th width="20%">播放类别：</th>
+									<td width="80%">
+									<input type="radio" name="type" class="input" size="40" value="1" checked>{$info_type[1]}</>&nbsp;
+									<input type="radio" name="type" class="input" size="40" value="2">{$info_type[2]}</>&nbsp; 
+									<input type="radio" name="type" class="input" size="40" value="3">{$info_type[3]}</>
+									</td>
+								</tr>
+								<tr>
+									<th width="20%">播放内容：</th>
+									<td width="80%">
+									<textarea name="content" id="content" cols="40" rows="5"></textarea>
+									</td>
+								</tr>
+							</table>
+							<div class="row">
+								<div class="col-md-7">
+									<button class="btn btn-primary mr10 " type="submit"><font size="3">提交</font></button>
+									<a href="#" class="btn btn-gray" onclick="window.history.go(-1)"><font size="3">返回</font></a>
+								</div>
+							</div>
+					</div>
+
+				</div>
+			
+			<input name="device" id="device" type="hidden" value="">
+			
+			</form>
+			
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+</body>
+</html>
+<script>
+	function check() {
+		var device = left.window.d.getText();
+		var title = document.getElementById("title").value;
+		var length = document.getElementById("length").value;
+		var content = document.getElementById("content").value;
+		if (device == '') {
+			alert("请选择设备")
+			return false;
+		} else {
+			window.document.getElementById("device").value = device;
+		}
+		if (title == '' || length == '' || content == '') {
+			alert("请完整填写信息");
+			return false;
+		}
+		return true;
+	}
+</script>

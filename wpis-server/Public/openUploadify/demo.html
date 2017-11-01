@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="openuploadify.css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.openuploadify.js"></script>
+<style type="text/css">
+</style>
+<script type="text/javascript">
+$(function(){
+	$('#upload').Huploadify({
+		auto:true,
+		fileTypeExts:'*.jpg;*.png;*.exe;*.mp4',
+		multi:true,
+		formData:{
+			key:123456,
+			key2:'vvvv',
+			key3:document.getElementById('name').value
+			},
+		fileSizeLimit:9999999,
+		showUploadedPercent:true,//是否实时显示上传的百分比，如20%
+		showUploadedSize:true,
+		removeTimeout:9999999,
+		uploader:'upload.php',
+		onUploadStart:function(){
+			//alert('开始上传'); 
+			},
+		onInit:function(){
+			//alert('初始化');
+			},
+		onUploadComplete:function(file,data){
+			//alert('上传完成');
+			//  console.log(data);
+			},
+		onCancel:function(file){
+			//console.log('删除的文件：'+file);
+			//console.log(file);
+			del(file);
+		}
+		});
+	});
+
+	function del(file){
+			
+
+		$.ajax({
+            type: "POST",
+            url: "delete.php",
+            contentType: "application/json", //必须有
+            dataType: "", //表示返回值类型，不必须
+            data: JSON.stringify({ 'name': file.name}),  //相当于 //data: "{'str1':'foovalue', 'str2':'barvalue'}",
+            success: function (jsonResult) {
+                alert(jsonResult);
+            }
+        });
+			
+	}
+	function getSelect()
+	{
+	}
+</script>
+</head>
+
+<body>
+<div id="upload"></div>
+<input id='name' value="2"></input>
+</body>
+</html>

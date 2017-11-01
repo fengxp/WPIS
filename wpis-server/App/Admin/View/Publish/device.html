@@ -1,0 +1,64 @@
+<include file="Public/head" />
+<link rel="StyleSheet" href="__DTREE__/dtree.css" type="text/css" />
+<script type="text/javascript" src="__DTREE__/dtree.js"></script>
+<style>
+body
+{
+	background-color:#fff;
+}
+
+</style>
+<div class="row">
+	<div class="col-xs-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<table >
+			<tr>
+				<div id="myTree0" >
+					<p>
+						<a href="javascript: d.openAll();">展开</a> | <a
+							href="javascript: d.closeAll();">合并</a>
+					</p> <br>
+				</div>
+					<div id="myTree"></div>	
+			</tr>
+		</table>
+	</div>
+	<!-- PAGE CONTENT ENDS -->
+<!-- /.col -->
+</div>
+<!-- /.row -->
+
+		<include file="Public/footerjs" />
+		<script type="text/javascript">
+			$(function() {
+
+				creatDtree();
+				d.openAll();
+			});
+			var dtroot = "__DTREE__";
+			d = new dTree('d');
+			d.config.check = true;
+			function creatDtree() {
+				$.ajax({
+					url : "{:U('getDevice')}",
+					async : false,//同步，等这个请求完成后才继续往下执行,这样myTree才能使用返回来的数据  
+					dataType : "json",
+					success : function(myData) {
+						for (var i = 0; i < myData.length; i++) {
+							var obj = myData[i];
+							//right是window.parent的一个frame的name  
+							d.add(obj.id, obj.p_id, obj.name, "", "", "");
+
+						}
+						document.getElementById('myTree').innerHTML = d;
+					}
+				});
+				d.config.useCookies = false;
+				d.config.inOrder = true;
+
+			}
+			function getSelect() {
+				var strSelect = d.getText();
+				//parent.window.document.getElementById("device").value=strSelect;
+			}
+		</script>

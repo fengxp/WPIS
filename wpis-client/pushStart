@@ -1,0 +1,16 @@
+#!/bin/bash
+#  author fengxp
+#  time  2016-05-24 
+#  program : 监听事件
+
+eval `cat /var/eadv/conf/conf.ini`
+ID=$id;
+ADDR=$addr_server;
+echo $ID;
+echo $ADDR;
+while [ true ];do
+
+	/usr/bin/php /var/eadv/proxy/pushClient.php $ID $ADDR > /root/push.log
+	
+	sleep 3; 
+done

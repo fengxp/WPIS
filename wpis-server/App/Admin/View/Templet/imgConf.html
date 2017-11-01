@@ -1,0 +1,118 @@
+<include file="Public/head"/>
+
+<div class="row">
+	<div class="col-xs-10 col-sm-10">
+		<!-- PAGE CONTENT BEGINS -->
+			<div class="space-4"></div>
+			<div class="btn-group">
+				<div class="col-sm-10">
+					<div class="input-group">
+						<div class="input-group-addon">宽度</div>
+						<input name="width" class=" " id="width" type="number" placeholder="" maxlength="4"  value="{$width}">
+					</div>
+					<div class="space-4"></div>
+					<div class="col-sm-10">
+						<div id="slider"></div>
+					</div>
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="btn-group">
+				<div class="col-sm-10">
+					<div class="input-group">
+						<div class="input-group-addon">高度</div>
+						<input name="height" class="" id="height" type="number" placeholder="" maxlength="4"  value="{$height}">
+					</div>
+					<div class="space-4"></div>
+					<div class="col-sm-10">
+						<div id="slider_height"></div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<div class="space-12"></div>
+			
+			<div class="btn-group">
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-info" id="button"><i class="icon-ok bigger-110"></i>确定</button>
+					&nbsp; &nbsp; &nbsp;
+				</div>
+			</div>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footerjs"/>
+<script>
+	var infoType="{$infoType}";
+	var getHeight=window.parent.document.getElementById(infoType).offsetHeight;
+	var getWidth=window.parent.document.getElementById(infoType).offsetWidth;
+$(function(){
+	
+	$('#button').click(function(){
+		var width = $('#width').val();
+		var height = $('#height').val();
+		
+		if(height == ''){
+			layer.tips('请输入高度','#height',{
+				tips: 3
+			});
+			return false;
+		}
+		if(width == ''){
+			layer.tips('请输入宽度', '#width',{
+				tips: 3
+			});
+			return false;
+		}
+		if(parseInt(height)>1920){
+			layer.tips('高度应小于1920', '#height',{
+				tips: 3
+			});
+			return false;
+		}
+		if(parseInt(width)>1920){
+			layer.tips('宽度应小于1920', '#width',{
+				tips: 3
+			});
+			//layer.msg('新密码不能使用原密码');
+			return false;
+		}
+		window.parent.document.getElementById(infoType).style.height=parseInt(height)+'px';
+		window.parent.document.getElementById(infoType).style.width=parseInt(width)+'px';
+		var index = parent.layer.getFrameIndex(window.name); //获取当前窗体索引
+        parent.layer.close(index);
+	});
+});
+
+  $(function() {
+    $( "#slider" ).slider({
+		range: "max",
+		min: 1,
+		max: 1920,
+		value: getWidth,
+		slide: function( event, ui ) {
+			$( "#width" ).val( ui.value );
+			window.parent.document.getElementById(infoType).style.width=parseInt(ui.value)+'px';
+		}
+	});
+	$( "#slider_height" ).slider({
+		range: "max",
+		min: 1,
+		max: 1920,
+		value: getHeight,
+		slide: function( event, ui ) {
+			$( "#height" ).val( ui.value );
+			window.parent.document.getElementById(infoType).style.height=parseInt(ui.value)+'px';
+		}
+	
+	});
+	$('#width').val(getWidth);
+	$('#height').val(getHeight);
+  });
+
+</script>
+</body>
+</html>

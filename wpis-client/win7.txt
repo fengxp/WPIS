@@ -1,0 +1,3 @@
+php -S 0.0.0.0:8080 -t ./proxy
+
+php ./proxy/pushClient.php 20 "tcp://192.168.2.200:26766"

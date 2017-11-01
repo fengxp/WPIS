@@ -1,0 +1,52 @@
+﻿<include file="Public/headers"/>
+
+<div class="row">
+	<div class="col-md-12">
+		<!-- PAGE CONTENT BEGINS -->
+	    <div id="row">
+			<div class="col-md-4">
+			<iframe id="left" name="left" frameborder="0" scrolling="yes" width="100%" height="520px"  src="{:U('device')}" style="background:#F9F9F9;"></iframe>
+			</div>
+			<div class="col-md-7">
+				<div class="table_full">
+				<label class="col-sm-2 control-label no-padding-right" > 发布指令 </label>
+					<form action="{:U('save')}" method="post" onsubmit="return check();">
+					<table class="table table-hover">
+					<tr><td><input type="radio" name="type" class="input"  value="1" checked>&nbsp;&nbsp;重启</></td></tr>
+					<tr><td><input type="radio" name="type" class="input"  value="2">&nbsp;&nbsp;关机</></td></tr>
+					<tr><td><input type="radio" name="type" class="input"  value="3">&nbsp;&nbsp;横屏显示</></td></tr>
+					<tr><td><input type="radio" name="type" class="input"  value="4">&nbsp;&nbsp;竖屏显示</></td></tr>
+					</table>
+					<div class="row">
+						<div class="col-md-7">
+						<button class="btn btn-primary mr10 " type="submit"><font size="3">提交</font></button>
+						<a href="#" class="btn btn-gray" onclick="window.history.go(-1)"><font size="3">返回</font></a>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</div>
+		<input name="device" id="device" type="hidden" value="">
+		
+		</form>
+
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+
+</body>
+</html>
+<script>
+	function check() {
+		var device = left.window.d.getText();
+		if (device == '') {
+			alert("请选择设备")
+			return false;
+		} else {
+			window.document.getElementById("device").value = device;
+		}
+		return true;
+	}
+</script>

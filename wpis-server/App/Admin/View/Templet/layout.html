@@ -1,0 +1,160 @@
+<include file="Public/headers"/>
+<link rel="stylesheet" href="__PUBLIC__/admin/css/layout.css"/>
+<div class="row">
+<!-- PAGE CONTENT BEGINS -->
+	<div class="col-xs-12">	
+		<div class="col-xs-9"><!--col 10 -->
+		  <div data-toggle="buttons" class="btn-group">
+			<label class="btn btn-primary">
+				<input type="radio" value="1" />
+				<i class="fa fa-align-left"></i>
+			</label>
+			
+			<label class="btn btn-primary">
+				<input type="radio" value="2" />
+				<i class="fa fa-align-center"></i>
+			</label>
+		
+			<label class="btn btn-primary ">
+				<input type="radio" value="3" />
+				<i class="fa fa-align-right"></i>
+			</label>
+		  </div>
+		  <!-- 文字组件 -->
+		  <div class="btn-group">  
+			<button class="btn btn-default" data-rel="tooltip" data-toggle="" title="文字" onclick="creatText();">Text
+			</button>
+		   
+			<a class="btn " data-toggle="dropdown" title="字体" data-rel="tooltip" data-original-title="Font"><i class="fa fa-font"></i><i class="ace-icon fa fa-sort-desc icon-on-right"></i></a>  
+			<ul class="dropdown-menu dropdown-light"> 
+				<li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>  
+				<li><a data-edit="fontName Courier" style="font-family:'Courier'">Courier</a></li>
+				<li><a data-edit="fontName Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans MS</a></li> <li><a data-edit="fontName Helvetica" style="font-family:'Helvetica'">Helvetica</a></li>  
+				<li><a data-edit="fontName Open Sans" style="font-family:'Open Sans'">Open Sans</a></li>  
+				<li><a data-edit="fontName Tahoma" style="font-family:'Tahoma'">Tahoma</a></li>  
+				<li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>  
+			</ul>  
+			<a class="btn " data-toggle="dropdown" title="大小" data-rel="tooltip" ><i class="fa fa-text-height"></i>&nbsp;<i class="ace-icon fa fa-sort-desc icon-on-right"></i></a> 
+			<ul class="dropdown-menu dropdown-light">  
+				<li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>  
+				<li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>  
+				<li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>  
+			</ul>  
+		  </div>
+		  <!-- 字体控件 -->
+		  <div class="btn-group">  
+			<a class="btn btn-info" data-edit="bold" title="" data-original-title="Bold (Ctrl/Cmd+B)"><i class="fa fa-bold"></i></a>  
+			<a class="btn btn-info" data-edit="italic" title="" data-original-title="Italic (Ctrl/Cmd+I)"><i class="fa fa-italic"></i></a>  
+			<a class="btn btn-info" data-edit="strikethrough" title="" data-original-title="Strikethrough"><i class="fa fa-strikethrough"></i></a> 
+			<a class="btn btn-info" data-edit="underline" title="" data-original-title="Underline"><i class="fa fa-underline"></i></a>  
+		  </div>
+
+		  <div class="btn-group">  
+			<button class="btn btn-success" data-rel="tooltip" data-toggle="" title="图片" onclick="select_img();">
+					<i class="fa fa-picture-o"></i>
+			</button>
+		  </div>
+
+		  <div class="btn-group">  
+			<button class="btn btn-pink" data-rel="tooltip" data-toggle="" title="视频" onclick="select_video();">
+					<i class="fa fa-video-camera"></i>
+			</button>
+		  </div>
+
+		  <div class="btn-group">  
+			<a class="btn btn-info" data-toggle="dropdown" data-rel="tooltip" data-toggle="" title="字幕">
+					<i class="fa fa-bars"></i>&nbsp;<i class="ace-icon fa fa-sort-desc icon-on-right"></i></a>
+			<ul class="dropdown-menu dropdown-light">  
+				<li><a data-edit="字幕 1" onclick="select_info(1);"><font size="3">字幕 1</font></a></li>  
+				<li><a data-edit="字幕 2" onclick="select_info(2);"><font size="3">字幕 2</font></a></li>  
+				<li><a data-edit="字幕 3" onclick="select_info(3);"><font size="3">字幕 3</font></a></li>  
+			</ul>  
+			
+		  </div>
+
+		  <div class="btn-group">  
+			<button class="btn btn-inverse" data-rel="tooltip" data-toggle="" title="ATS" onclick="select_ats();">
+					<i class="fa fa-bus"></i>
+			</button>
+		  </div>
+		  <div class="btn-group">  
+			<button class="btn btn-purple" data-rel="tooltip" data-toggle="" title="天气" onclick="select_weather();">W
+					
+			</button>
+		  </div>
+	  </div><!--col 10 -->
+	  
+	  <div class="col-xs-3"><!--col 2 -->
+	  <form action="{:U('layout_save')}" role="form" method="post" onsubmit="return layout_submit();">
+		<div class="form-group inline">
+			<button class="btn btn-sm btn-info" type="submit"><i class="icon-ok bigger-110"></i>确定提交</button>
+			
+			<button class="btn btn-sm" type="reset" onclick="layout_reset();"><i class="icon-undo bigger-110"></i>取消重做</button>
+
+<!-- 			<button class="btn btn-sm btn-info"  onclick="layout_prev();"><i class="fa fa-search bigger-110"></i>预览</button> -->
+		</div>
+		<input type="hidden" id="TempName" name="TempName"  value="{$TempName}"  />
+		<input type="hidden" id="bg_id" name="bg_id"  value="{$bg_id}"  />
+		<input type="hidden" id="bg_width" name="bg_width"  value="{$width}"  />
+		<input type="hidden" id="bg_height" name="bg_height"  value="{$height}"  />
+		<input type="hidden" id="img_val" name="img_val"  value=""  />
+		<input type="hidden" id="video_val" name="video_val"  value=""  />
+		<input type="hidden" id="ats_val" name="ats_val"  value=""  />
+		<input type="hidden" id="weather_val" name="weather_val"  value=""  />
+		<input type="hidden" id="info1_val" name="info1_val"  value=""  />
+		<input type="hidden" id="info2_val" name="info2_val"  value=""  />
+		<input type="hidden" id="info3_val" name="info3_val"  value=""  />
+		<input type="hidden" id="info1_txt" name="info1_txt"  value=""  />
+		<input type="hidden" id="info2_txt" name="info2_txt"  value=""  />
+		<input type="hidden" id="info3_txt" name="info3_txt"  value=""  />
+	  </form>
+	  </div><!--col 2 -->
+	
+	  <div class="col-xs-12"><!--col 12 -->
+		<div class="btn-group">
+			<div id="layout" class="moveAndZoom" >
+<!-- 			img	 -->
+				<div id="photo" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/photo2.png)"ondblclick="myReMouse(this,'{:U(imgConf,array(type=>photo))}');"><div class="handler"></div>
+				</div>
+<!-- 			video	 -->
+				<div id="video" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/video2.png)"ondblclick="myReMouse(this,'{:U(imgConf,array(type=>video))}');"><div class="handler"></div>
+				</div>
+<!--			ats		 -->
+				<div id="ats" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/ats.png)"ondblclick="myReMouse(this,'{:U(imgConf,array(type=>ats))}');"><div class="handler"></div>
+				</div>
+<!--			weather	-->
+				<div id="weather" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/weather.png)"ondblclick="myReMouse(this,'{:U(imgConf,array(type=>weather))}');"><div class="handler"></div>
+				</div>
+<!--			info	-->
+				<div id="info1" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/info1.png)"ondblclick="myReMouse2(this,'{:U(infoConf,array(info=>1))}');"><div class="handler"></div>
+				</div>
+				<div id="info2" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/info2.png)"ondblclick="myReMouse2(this,'{:U(infoConf,array(info=>2))}');"><div class="handler"></div>
+				</div>
+				<div id="info3" class="moveDiv" style="background-image:url(__ROOT__/Public/admin/img/info3.png)"ondblclick="myReMouse2(this,'{:U(infoConf,array(info=>3))}');"><div class="handler"></div>
+				</div>
+				
+			</div>	
+		</div>
+	  </div><!-- /.col 12 -->
+	<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col 12 -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+<script src="__PUBLIC__/admin/js/layout.js"></script>
+<script type="text/javascript">
+	$().ready(function(){
+		$(".moveAndZoom").css({ "width":"{$width}px","height":"{$height}px"});
+		$(".moveAndZoom").css("background-image","url("+'__ROOT__/Public/upload/{$bg_name}'+")");
+		reSizeMove();	
+	})
+
+	$('[data-rel=tooltip]').tooltip();
+	function creatText()
+	{
+		//$("#layout").append(" <b>Hello world!</b>");
+		
+	}
+</script>
+</body>
+</html>

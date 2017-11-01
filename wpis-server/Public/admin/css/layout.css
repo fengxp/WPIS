@@ -1,0 +1,57 @@
+	.moveAndZoom {
+        position: relative;
+		background: url('');
+		background-repeat:no-repeat;
+		-moz-background-size:100% 100%;  
+		background-size:100% 100%; 
+
+    }
+    .moveElement {
+		display:none;
+        /*display: inline-block;*/
+        position: absolute;
+		width: 150px;
+        height:150px;
+		left:0px;
+		top:0px;
+		
+    } 
+    .zoomElement {
+		
+	}
+	
+
+	.moveDiv{
+		position: absolute;
+		display:none;
+		width: 150px;
+        height:150px;
+		left:0px;
+		top:0px;
+		border:1px solid black;
+		cursor:move;
+		background-repeat:no-repeat;
+		-moz-background-size:100% 100%;  
+		background-size:100% 100%;
+	}
+	.handler
+	{
+		width:12px;
+		height:15px;
+		background-image:url("../img/adminbar.gif");
+		position:absolute;
+		right:1px;
+		bottom:1px;
+		cursor:nw-resize;
+	}
+	.iframe-imglist {
+	width: 100%;
+	height: 450px;
+	border: 0px;
+	}
+	.opbutton button {
+		margin-bottom: 5px;
+	}
+	.selected {
+		background-color: #e7e7e7;
+	}

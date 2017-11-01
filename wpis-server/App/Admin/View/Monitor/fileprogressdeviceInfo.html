@@ -1,0 +1,65 @@
+<include file="Public/head"/>
+
+<div class="row">
+                    <div class="col-xs-12">
+                     <div class="row">
+                            <form class="form-inline" action="" method="get">
+                             <a class="btn btn-info" href="" value="">文件下载列表</a>
+                             <label class="inline">&nbsp;&nbsp;文件名称：</label>
+                             <input type="text" name="keyword" value="{:I(keyword)}" class="form-control">
+                             <!--  
+                             <label class="inline">&nbsp;&nbsp;排序：</label>
+                             <select name="order" class="form-control">
+                                <option <if condition="I('order') eq asc">selected</if> value="asc">提交时间升</option>
+                                <option <if condition="I('order') eq desc">selected</if> value="desc">提交时间降</option>
+                              </select>
+                              -->
+                              <button type="submit" class="btn btn-purple btn-sm">
+                                 <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+                                    Search
+                              </button>
+                            </form>
+                        </div>
+                         <div class="space-4"></div>
+                         <div class="row">
+                        <!-- PAGE CONTENT BEGINS -->
+                        <form id="export-form" method="post" action="{:U('contractdel')}">
+                            <table class="table table-striped table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="center">文件名称</th>
+                                    <th class="center">文件下载进度</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <style>
+								.grouptd{
+										position: relative;
+										}									
+								  .group{
+										display: inline-block;
+										width: 100%;
+										}												
+						    .groupselect{
+										position: absolute;
+										top: 0;
+										left: 0;
+										width: 100%;
+									    height: 100%;
+										border: 0;
+										}
+								</style>
+                                <volist name="list" id="val">
+                                    <tr>
+                                        <td class="center">{$val['filename']}</td>
+                                        <td class="center">{$val['progress']}</td>
+                                    </tr>
+                                </volist>
+                                </tbody>
+                            </table>
+                        </form>
+                        {$pages}
+                         </div>
+                        <!-- PAGE CONTENT ENDS -->
+                    </div><!-- /.col -->
+                </div><!-- /.row -->

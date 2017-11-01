@@ -1,0 +1,27 @@
+#!/bin/bash
+#/usr/bin/chromium-browser --user-data-dir="/root/.config/chromium" --disk-cache-dir="/tmp/chromium" --incognito & 
+#sleep 1
+ 
+while true
+do
+#/usr/bin/killall chromium-browser
+
+scren=$(cat /var/eadv/proxy/event/order.log)
+if [ "$scren" == "4" ]; then
+	output="1080,1920"
+elif [ "$scren" == "3" ]; then
+	output="1920,1080"
+else
+	echo "error screen"
+	output="1920,1080"
+fi
+date >> /root/chromStart.log
+echo $output >/root/chromStart.log
+
+
+/usr/bin/chromium-browser --user-data-dir="/root/.config/chromium" --allow-file-access-from-files --kiosk --window-size=$output --disk-cache-dir="/tmp/chromium" --incognito --disable-desktop-notifications --no-first-run file:///var/eadv/pids/index.html 2>&1 
+
+sleep 1
+echo "whill reboot chromium..." >>/root/chromStart.log
+#/sbin/reboot >>/root/chromStart.log
+done

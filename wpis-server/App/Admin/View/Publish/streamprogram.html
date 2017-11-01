@@ -1,0 +1,109 @@
+<include file="Public/headers"/>
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" action="{:U('streamprogramtosave')}" method="post" onsubmit="return check();">
+			<div class="row">
+				<div class="col-xs-3">
+					<iframe margin-left="0px" id="left" name="left" frameborder="0" scrolling="no" height="500" src="{:U('device')}" style="background:#F9F9F9;"></iframe>
+				</div>
+				<div class="col-xs-9" id="timeset">
+					<iframe id="right" name="right" frameborder="0" scrolling="no" width="100%" height="500" src="{:U('proLists')}"></iframe>
+				</div>
+			</div>
+			<input name="device" id="device" type="hidden" value="">
+			<input name="program" id="program" type="hidden" value="">
+			<input name="begindate" id="begindate" type="hidden" value="">
+			<input name="enddate" id="enddate" type="hidden" value="">
+			<input name="rules" id="rules" type="hidden" value="">
+			<!--  
+			<input type="text" id="name" name="name"  value="" readonly="readonly"/>
+			 -->
+			 <div class="row">
+				<div class="col-sm-4 col-md-offset-3" >  
+				  <div class="checkbox">
+					<label><input id="atonce" name="atonce" type="checkbox" value="1" class="ace">
+						<span class="lbl">即时播放</span>
+					</label>
+				  </div>	
+					  
+				</div>
+			</div>
+			<div class="space-4"></div>
+			<div class="form-group">
+				<div class="col-sm-9 col-sm-offset-3">
+					<div class="input-group">
+					  <div class="input-group-addon">媒体地址：</div>
+					  <input name="content" id="content" class=" input-sm col-sm-6" id="layoutWidth" type="text" placeholder="" maxlength=""  value="">
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+			
+				<div class="col-sm-9 col-sm-offset-3">	
+					<button class="btn btn-primary" type="submit">提交</button>
+					<a href="{:U(videoindex)}" class="btn btn-grey">返回</a>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+</div><!-- /.page-content -->
+</div>
+</div><!-- /.main-content -->
+<include file="Public/footer"/>
+</div><!-- /.main-container -->
+<include file="Public/footerjs"/>
+</body>
+</html>
+<script>
+	function check() {
+		var begindate=right.window.document.getElementById("begindate").value;
+		var enddate=right.window.document.getElementById("enddate").value;		
+		var rules=right.window.document.getElementById("rules").value;
+		var device = left.window.d.getText();
+		var content=window.document.getElementById("content").value;
+		if(content == ""){
+			alert("请输入媒体地址");
+		}
+		if (device == '') {
+			alert("请选择设备")
+			return false;
+		} else {
+			window.document.getElementById("device").value = device;
+			window.document.getElementById("begindate").value=begindate;
+			window.document.getElementById("enddate").value=enddate;
+			window.document.getElementById("rules").value=rules;
+			
+		}
+		/*****
+		if (program == '') {
+			alert("请选择预定义信息")
+			return false;
+		}
+		******/
+		return true;
+	}
+	$("#select-bg").click(function () {
+		layer.open({
+			type: 2,
+			closeBtn: 2,
+			area: ['800px', '500px'],
+			shadeClose: true,
+			title: '选择预定义信息',
+			content: '{:U("streamdialogproLists")}'
+		});
+		return false;
+    });
+	$("#atonce").click(function(){
+		if($('#atonce').is(':checked')) {
+			//alert("checked");
+			$("#timeset").hide();
+		}else{
+			$("#timeset").show();
+			//alert("nochecked");
+		}
+
+	});
+</script>

@@ -1,0 +1,103 @@
+<include file="Public/headers"/>
+<div class="row">
+	<div class="col-sm-12">
+		<!-- PAGE CONTENT BEGINS -->
+		<div id="alert" class="alert alert-block alert-warning " style="display:none">
+				<button type="button" class="close " data-dismiss="alert">
+					<i class="icon-remove"></i>
+				</button>
+
+				<i class="icon-ok green"></i>
+				<div id="alert-msg"></div>
+		</div>
+		<form class="form-horizontal" role="form" action="{:U('edit')}"  method="post">
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 模板名称: </label>
+				<div class="col-sm-8">
+					<input type="text"  class="col-sm-5 input-sm" id="TempName"
+					name="TempName"  maxlength="50" value="{$val.temp_name}">
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 背景图片: </label>
+				<div class="col-sm-8">
+					<input type="text"  class="col-sm-5 input-sm" id="fileName"
+					name="fileName"  maxlength="50" value="{$val.file_name}" disabled>
+				</div>
+			</div>
+
+			<div class="space-4"></div>
+		
+			
+			<div class="form-group">
+				<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> 分辨率: </label>
+				<div class="col-sm-8">
+					<div class="input-group">
+					  <div class="input-group-addon">宽度</div>
+					  <input name="width" class=" input-sm col-sm-2" id="layoutWidth" type="number" placeholder="" maxlength="4"  value="{$val.temp_width}">
+					</div>
+				</div>
+			</div>
+			<div class="space-4"></div>
+			
+			<div class="form-group">
+				<div class="col-sm-8 col-md-offset-1">
+					<div class="input-group">
+					  <div class="input-group-addon">高度</div>
+					  <input name="height" class="input-sm col-sm-2" id="layoutHeight" type="number" placeholder="" maxlength="4"  value="{$val.temp_height}">
+					</div>
+				</div>
+			</div>
+			<div class="space-4"></div>
+
+			<div class="form-group">
+				<div class="col-sm-10 col-md-offset-1">
+<!-- 					<button class="btn btn-info" type=""><i class="icon-ok bigger-110"></i>下一步</button> -->
+					
+					<button class="btn btn-info" type="submit"><i class="icon-ok bigger-110"></i>确定</button>
+					&nbsp; &nbsp; &nbsp;
+					<a href="javascript:history.back()" class="btn btn-grey">返 回</a>
+					
+				</div>
+			</div>
+			<div class="space-4"></div>
+			<input type="hidden" id="id" name="id"  value="{$val.id}"  />
+
+		</form>
+		<!-- PAGE CONTENT ENDS -->
+	</div><!-- /.col -->
+</div><!-- /.row -->
+
+<include file="Public/footers"/>
+<script type="text/javascript">
+	
+	$("form").submit(function (){
+		var temp_name = $("#TempName").val();
+		var width = $("input[name='width']").val();
+		var height = $("input[name='height']").val();
+		if(temp_name=="")
+		{
+			$("#alert").css('display','block');
+			$("#alert-msg").html("警告：请填写模板名称！");
+			return false;
+		}
+		
+		if(width == "")
+		{
+			$("#alert").css('display','block');
+			$("#alert-msg").html("警告：请填写尺寸宽度！");
+			return false;
+		}
+		if(height == "")
+		{
+			$("#alert").css('display','block');
+			$("#alert-msg").html("警告：请填写尺寸高度！");
+			return false;
+		}
+		
+	});
+</script>
+</body>
+</html>

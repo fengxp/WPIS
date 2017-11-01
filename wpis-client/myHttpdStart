@@ -1,0 +1,10 @@
+#!/bin/bash
+#  author fengxp
+#  time  2016-05-24 
+#  program : 配置显示输出，并调用显示
+
+while [ true ];do
+
+	/usr/bin/php -S 0.0.0.0:8080 -t /var/eadv/proxy >/root/myHttpd.log 
+	sleep 3;
+done

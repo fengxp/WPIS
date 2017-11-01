@@ -1,0 +1,31 @@
+html, body{position: fixed;border:0;margin:0;padding:0;background-color: #000 !important;z-index:-3;width:100%;height:100%;overflow:hiden}
+.layOut {
+	position: relative;
+	background-color: #000 !important;
+	background:url('../img/hp.jpg');
+	background-repeat: no-repeat;
+	-moz-background-size:100% 100%;  
+	background-size:100% 100%;
+	width: 1920px;
+	height: 1080px;
+	z-index:-1;
+}
+.layDiv{
+	position: absolute;
+	background-repeat:no-repeat;
+	-moz-background-size:100% 100%;  
+	background-size:100% 100%;
+/*		border:1px solid #fff*/
+}
+.imgDiv{
+	top:106px;
+	left:15px;
+	width:614px;
+	height:464px;
+}
+.videoDiv{
+	top:105px;
+	left:640px;
+	width:1280px;
+	height:720px;
+}
