@@ -1,0 +1,3 @@
+乘客信息系统pis
+server端基于PHP
+client端基于HTML5
