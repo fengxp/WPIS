@@ -123,6 +123,8 @@ function getMediaAttr($val) {
 	else
 		return "Out of Range";
 }
+
+
 //获取预定义信息类别
 function getAllType($val,$alltype) {
 	$status=C($alltype);
